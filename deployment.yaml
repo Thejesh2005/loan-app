@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loan-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: loan-app
+  template:
+    metadata:
+      labels:
+        app: loan-app
+    spec:
+      containers:
+      - name: loan-app
+        image: thejeshrv/loan-app:latest
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loan-service
+spec:
+  selector:
+    app: loan-app
